@@ -8,15 +8,22 @@ function agregarAmigo() {
   if (!nombre) {
     alert("Por favor ingrese un nombre..");
     return;
-  } else {
-    limpiarInput();
-    amigos.push(nombre);
-    console.log(amigos);
   }
+
+  amigos.push(nombre); //agrega el nombre al array
+  limpiarInput(); //Limpia el input
+  agregarUltimoAmigo(); //agrega el ultimo amigo a la lista
 }
 
 function limpiarInput() {
-  document.querySelector("#amigo").value = "";
+  document.getElementById("amigo").value = "";
+}
+
+function agregarUltimoAmigo() {
+  const lista = document.querySelector("#listaAmigos");
+  const li = document.createElement("li");
+  li.textContent = amigos[amigos.length - 1]; //Toma el ultimo amigo del array
+  lista.appendChild(li); //Lo agrega como un nuevo <li>
 }
 
 function setearTexto(elemento, texto) {
