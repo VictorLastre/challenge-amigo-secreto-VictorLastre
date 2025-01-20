@@ -2,6 +2,9 @@
 limpiarAmigoSorteado();
 let amigos = [];
 
+// Referencia al botón de sortear
+const botonSortear = document.getElementById("botonSortear");
+
 function agregarAmigo() {
   let nombre = document.getElementById("amigo").value;
 
@@ -10,9 +13,10 @@ function agregarAmigo() {
     return;
   }
 
-  amigos.push(nombre); //agrega el nombre al array
-  limpiarInput(); //Limpia el input
-  agregarUltimoAmigo(); //agrega el ultimo amigo a la lista
+  amigos.push(nombre); // Agrega el nombre al array
+  limpiarInput(); // Limpia el input
+  agregarUltimoAmigo(); // Agrega el último amigo a la lista
+  actualizarEstadoBotonSortear(); // Actualiza el estado del botón
 }
 
 function limpiarInput() {
@@ -22,8 +26,8 @@ function limpiarInput() {
 function agregarUltimoAmigo() {
   let lista = document.querySelector("#listaAmigos");
   let li = document.createElement("li");
-  li.textContent = amigos[amigos.length - 1]; //Toma el ultimo amigo del array
-  lista.appendChild(li); //Lo agrega como un nuevo <li>
+  li.textContent = amigos[amigos.length - 1]; // Toma el último amigo del array
+  lista.appendChild(li); // Lo agrega como un nuevo <li>
 }
 
 function setearTexto(elemento, texto) {
@@ -33,7 +37,7 @@ function setearTexto(elemento, texto) {
 }
 
 function limpiarLista() {
-  //selecciona el elemento de la lista y la vacia
+  // Selecciona el elemento de la lista y la vacía
   let lista = document.querySelector("#listaAmigos");
   lista.innerHTML = "";
 }
@@ -43,21 +47,31 @@ function limpiarAmigoSorteado() {
 }
 
 function sortearAmigo() {
-  //Validar que haya al menos un amigo ene l array
+  // Validar que haya al menos un amigo en el array
   if (amigos.length === 0) {
     document.getElementById("resultado").innerHTML =
       "No hay amigos para sortear";
+    return;
   }
-  //Generar indice aleatorio
-  let indicieAleatorio = Math.floor(Math.random() * amigos.length);
 
-  //obtener nombre del array
-  let amigoSorteado = amigos[indicieAleatorio];
+  // Generar índice aleatorio
+  let indiceAleatorio = Math.floor(Math.random() * amigos.length);
 
-  //mostar el resultado
+  // Obtener nombre del array
+  let amigoSorteado = amigos[indiceAleatorio];
+
+  // Mostrar el resultado
   document.getElementById(
     "resultado"
-  ).innerHTML = `Amigo sorteado <strong>${amigoSorteado}</strong>`;
+  ).innerHTML = `Amigo sorteado: <strong>${amigoSorteado}</strong>`;
   // Limpiar la lista de amigos que se ve
   limpiarLista();
 }
+
+// Función para habilitar o deshabilitar el botón de sorteo
+function actualizarEstadoBotonSortear() {
+  botonSortear.disabled = amigos.length === 0;
+}
+
+// Llamar a la función al cargar la página para asegurarse de que el botón esté en el estado correcto
+actualizarEstadoBotonSortear();
