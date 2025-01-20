@@ -20,8 +20,8 @@ function limpiarInput() {
 }
 
 function agregarUltimoAmigo() {
-  const lista = document.querySelector("#listaAmigos");
-  const li = document.createElement("li");
+  let lista = document.querySelector("#listaAmigos");
+  let li = document.createElement("li");
   li.textContent = amigos[amigos.length - 1]; //Toma el ultimo amigo del array
   lista.appendChild(li); //Lo agrega como un nuevo <li>
 }
@@ -38,4 +38,14 @@ function sortearAmigo() {
     document.getElementById("resultado").innerHTML =
       "No hay amigos para sortear";
   }
+  //Generar indice aleatorio
+  let indicieAleatorio = Math.floor(Math.random() * amigos.length);
+
+  //obtener nombre del array
+  let amigoSorteado = amigos[indicieAleatorio];
+
+  //mostar el resultado
+  document.getElementById(
+    "resultado"
+  ).innerHTML = `Amigo sorteado <strong>${amigoSorteado}</strong>`;
 }
