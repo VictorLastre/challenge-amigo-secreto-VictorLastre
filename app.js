@@ -31,3 +31,11 @@ function setearTexto(elemento, texto) {
   elemento.innerHTML = texto;
   return;
 }
+
+function sortearAmigo() {
+  //Validar que haya al menos un amigo ene l array
+  if (amigos.length === 0) {
+    document.getElementById("resultado").innerHTML =
+      "No hay amigos para sortear";
+  }
+}
